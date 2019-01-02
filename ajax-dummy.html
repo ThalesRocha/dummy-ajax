@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+
+  <table id="table-user">
+    <tr>
+      <th>Name</th>
+      <th>E-mail</th>
+      <th>Address</th>
+    </tr>
+  </table>
+
+  <body>
+    <script>
+      var url = "https://jsonplaceholder.typicode.com/users";
+      var xhr = new XMLHttpRequest();
+
+      xhr.open("GET", url);
+      xhr.send(null);
+      xhr.onreadystatechange = checkAjax;
+
+      function checkAjax() {
+        if (
+          xhr.readyState === 4 &&
+          (xhr.status === 200 || xhr.status === 304)
+        ) {
+          var response = JSON.parse(xhr.responseText);
+          showUser(response);
+        } else {
+          console.log("Error on request");
+          console.log(xhr);
+        }
+      }
+
+      var $table = document.getElementById("table-user");
+
+      function showUser(users) {
+        usuarios.forEach(user => {
+          var newRow = $table.insertRow();
+          newRow.innerHTML = `<td>${usuario.name}</td><td>${
+            usuario.email
+          }</td><td>${usuario.address.street}, ${usuario.address.suite}</td>`;
+        });
+      }
+    </script>
+  </body>
+</html>
